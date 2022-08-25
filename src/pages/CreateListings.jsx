@@ -75,7 +75,7 @@ function CreateListings() {
 
     setLoading(true);
 
-    if (discountedPrice <= regularPrice) {
+    if (discountedPrice >= regularPrice) {
       console.log(discountedPrice);
       console.log(regularPrice);
       setLoading(false);
@@ -95,7 +95,7 @@ function CreateListings() {
       return new Promise((resolve, reject) => {
         const storage = getStorage();
         const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`;
-        const storageRef = ref(storage, "images/" + fileName);
+        const storageRef = ref(storage, "imageUrls/" + fileName);
 
         const uploadTask = uploadBytesResumable(storageRef, image);
 

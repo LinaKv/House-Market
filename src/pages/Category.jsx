@@ -26,7 +26,6 @@ function Category() {
       try {
         // get reference
         const listingsRef = collection(db, "listening");
-        console.log(listingsRef);
         // create a query
         const q = query(
           listingsRef,

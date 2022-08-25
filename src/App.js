@@ -11,6 +11,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Category from "./pages/Category";
 import CreateListings from "./pages/CreateListings";
+import Listings from "./pages/Listings";
+import Concat from "./pages/Concat";
 
 function App() {
   return (
@@ -28,6 +30,11 @@ function App() {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/CreateListings" element={<CreateListings />} />
+          <Route
+            path="/category/:categoryName/:listingId"
+            element={<Listings />}
+          />
+          <Route path="/contact/:landlordId" element={<Concat />} />
         </Routes>
 
         <Navbar />
