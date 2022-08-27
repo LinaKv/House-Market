@@ -26,7 +26,6 @@ function Offers() {
       try {
         // get reference
         const listingsRef = collection(db, "listening");
-        console.log(listingsRef);
         // create a query
         const q = query(
           listingsRef,
@@ -35,15 +34,10 @@ function Offers() {
           limit(10)
         );
         // execute query
-        console.log(q);
         const querySnap = await getDocs(q);
-        console.log(querySnap);
         let listings = [];
 
-        console.log(querySnap);
-
         querySnap.forEach((doc) => {
-          console.log(doc.data());
           return listings.push({
             id: doc.id,
             data: doc.data(),
@@ -53,7 +47,6 @@ function Offers() {
         setLoading(false);
         setListings(listings);
       } catch (error) {
-        console.log(error);
         toast.error("Could not fetch listings");
       }
     };

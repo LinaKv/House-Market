@@ -8,21 +8,19 @@ import { toast } from "react-toastify";
 function Concat() {
   const [message, setMessage] = useState("");
   const [landlord, setLandLord] = useState(null);
-  const [searchParams, setSearchParams] = useState();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useParams();
 
   useEffect(() => {
     const getLandLord = async () => {
       const docRef = doc(db, "users", params.landlordId);
-      console.log(docRef);
+
       const docSnap = await getDoc(docRef);
-      console.log(docSnap);
 
       if (docSnap.exists()) {
         setLandLord(docSnap.data());
       } else {
-        console.log(docSnap.data());
         toast.error("Could not get landlord data");
       }
     };
@@ -30,6 +28,10 @@ function Concat() {
     getLandLord();
   }, [params.lanLordId]);
 
+  const onChange = (e) => {
+    e.preventDefault();
+    setMessage(e.target.value);
+  };
   return (
     <div className="pageContainer">
       <header>
@@ -39,8 +41,33 @@ function Concat() {
       {landlord !== null && (
         <main>
           <div className="contactLandlord">
-            <p className="landlordName">Concat {landlord?.name}</p>
+            <p className="landlordName">Contact {landlord?.name}</p>
           </div>
+
+          <form className="messageForm">
+            <div className="messageDiv">
+              <label htmlFor="message" className="messageLabel">
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                className="textarea"
+                value={message}
+                onChange={onChange}
+              ></textarea>
+            </div>
+
+            {/* <a
+              href={`mailto:${landlord.email}?Subject=${searchParams.get(
+                "listingName"
+              )}&body=${message}`}
+            >
+              <button type="button" className="primaryButton">
+                Send Message
+              </button>
+            </a> */}
+          </form>
         </main>
       )}
     </div>

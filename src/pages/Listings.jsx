@@ -6,7 +6,13 @@ import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
 import shareIcon from "../assets/svg/shareIcon.svg";
-import { async } from "@firebase/util";
+// import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+// import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/swiper-bundle.css";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 function Listings() {
   const [listing, setListing] = useState(null);
@@ -21,10 +27,8 @@ function Listings() {
     const fetchListing = async () => {
       const docRef = doc(db, "listening", params.listingId);
       const docSnap = await getDoc(docRef);
-      console.log(2);
 
       if (docSnap.exists()) {
-        console.log(docSnap.data());
         setListing(docSnap.data());
         setLoading(false);
       }
@@ -40,6 +44,26 @@ function Listings() {
   return (
     <main>
       {/* slider */}
+      <Swiper
+        slidesPerView={1}
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        pagination={{ clickable: true }}
+        navigation
+        scrollbar={{ draggable: true }}
+      >
+        {listing.imageUrls.map((url, index) => (
+          <SwiperSlide key={index}>
+            <div
+              style={{
+                background: `url(${listing.imageUrls[index]}) center no-repeat`,
+                backgroundSize: "cover",
+                minHeight: "26rem",
+              }}
+              className="swiperSlideDiv"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       <div
         className="shareIconDiv"
@@ -92,9 +116,11 @@ function Listings() {
 
         <p className="listingLocationTitle">Location</p>
 
-        {auth.currentUser?.uid !== listing.userRef && (
+        {auth.currentUser?.uid !== (listing.userRef || listing.useRef) && (
           <Link
-            to={`/contact/${listing.userRef}?listingName=${listing.name}`}
+            to={`/contact/${listing.userRef || listing.useRef}?listingName=${
+              listing.name
+            }`}
             className="primaryButton"
           >
             Contact Landlord

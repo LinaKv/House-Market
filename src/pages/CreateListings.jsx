@@ -75,9 +75,7 @@ function CreateListings() {
 
     setLoading(true);
 
-    if (discountedPrice >= regularPrice) {
-      console.log(discountedPrice);
-      console.log(regularPrice);
+    if (Number(discountedPrice) > Number(regularPrice)) {
       setLoading(false);
       toast.error("Discounted price need to be less than regular price");
       return;
@@ -196,7 +194,7 @@ function CreateListings() {
           <div className="formButton">
             <button
               type="button"
-              className={type === "sell" ? "formButtonActive" : "formButton"}
+              className={type === "sale" ? "formButtonActive" : "formButton"}
               id="type"
               value="sale"
               onClick={onMutate}
@@ -208,7 +206,7 @@ function CreateListings() {
               type="button"
               className={type === "rent" ? "formButtonActive" : "formButton"}
               id="type"
-              value="sale"
+              value="rent"
               onClick={onMutate}
             >
               Rent
