@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 function Concat() {
   const [message, setMessage] = useState("");
   const [landlord, setLandLord] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
 
   const params = useParams();
 

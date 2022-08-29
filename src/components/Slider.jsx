@@ -7,7 +7,6 @@ import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Spinner from "./Spinner";
-import { async } from "@firebase/util";
 
 function Slider() {
   const [loading, setLoading] = useState(true);

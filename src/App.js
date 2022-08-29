@@ -13,6 +13,7 @@ import Category from "./pages/Category";
 import CreateListings from "./pages/CreateListings";
 import Listings from "./pages/Listings";
 import Concat from "./pages/Concat";
+import EditListing from "./pages/EditListing";
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/SignUp" element={<SignUp />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/CreateListings" element={<CreateListings />} />
+          <Route path="/edit-listing/:listingId" element={<EditListing />} />
+
           <Route
             path="/category/:categoryName/:listingId"
             element={<Listings />}
